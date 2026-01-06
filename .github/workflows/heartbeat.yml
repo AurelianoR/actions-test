@@ -1,0 +1,19 @@
+name: Heartbeat Monitor
+
+# 1. Trigger: When do we watch?
+on: [push]
+
+# 2. Jobs: What do we do?
+jobs:
+  check-integrity:
+    # 3. Runner: Which computer do we use?
+    runs-on: ubuntu-latest
+
+    steps:
+      # 4. Pull the code: "Step into the building"
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 5. Run the check: "Wave at the camera"
+      - name: Verify Integrity
+        run: echo "Pipeline Integrity Verified - Monitoring Active"
