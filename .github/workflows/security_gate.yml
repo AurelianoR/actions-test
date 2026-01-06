@@ -1,0 +1,21 @@
+name: Security Policy Enforcement
+
+on: [push]
+
+jobs:
+  scan-for-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # The Gatekeeper Step
+      - name: Check for Forbidden Files
+        run: |
+          if [ -f passwords.txt ]; then
+            echo "CRITICAL SECURITY VIOLATION: passwords.txt detected!"
+            exit 1
+          else
+            echo "No forbidden files detected. Proceeding..."
+            exit 0
+          fi
